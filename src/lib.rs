@@ -133,8 +133,7 @@ impl Iterator for DeviceIter {
             Some(ref mut diriter) => diriter
                 .filter(|entry| entry.is_ok())
                 .map(|entry| entry.unwrap().path())
-                .filter(|path| bl_power(path).is_file())
-                .next()
+                .find(|path| bl_power(path).is_file())
                 .map(|p| Device::new(&p)),
             _ => None,
         }
